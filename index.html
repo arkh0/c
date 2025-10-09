@@ -20,6 +20,11 @@
             display: flex;
             min-height: 100vh;
             overflow: hidden; /* Prevent scroll during animation */
+            /* Disable text selection for the entire page */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Standard */
         }
 
         .left-side {
@@ -31,26 +36,25 @@
             justify-content: center;
             opacity: 0;
             transform: scale(0.95);
-            animation: fadeInScale 0.5s ease-out forwards; /* Fast animation */
+            animation: fadeInScale 0.5s ease-out forwards; /* Fade-in for left side */
         }
 
         .right-side {
             flex: 1;
             background-color: #0f0f23; /* Slightly lighter dark for contrast */
-            opacity: 0;
-            transform: scale(0.95);
-            animation: fadeInScale 0.5s ease-out forwards; /* Fast animation */
-            animation-delay: 0.1s; /* Slight stagger for right side */
             overflow: hidden; /* Ensure image doesn't overflow */
         }
 
-        /* Full-side image styling */
+        /* Full-side image styling with sweep animation */
         .right-side img {
             width: 100%;
             height: 100%;
             object-fit: cover; /* Ensure image covers the entire area */
             display: block;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2); /* Cyan glow effect */
+            transform: translateX(100%); /* Start off-screen to the right */
+            animation: sweepIn 0.5s ease-out forwards; /* Sweep-in animation */
+            animation-delay: 0.1s; /* Slight stagger */
         }
 
         /* Animation keyframes */
@@ -58,6 +62,12 @@
             to {
                 opacity: 1;
                 transform: scale(1);
+            }
+        }
+
+        @keyframes sweepIn {
+            to {
+                transform: translateX(0); /* Slide to original position */
             }
         }
 
@@ -90,7 +100,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <!-- Disable right-click -->
     <div class="left-side">
         <!-- Static place to write about yourself -->
         <h1>About Me</h1>
@@ -101,7 +111,15 @@
 
     <div class="right-side">
         <!-- Full-side image -->
-        <img src="https://arkh0.github.io/c/back.jpg" alt="Full Side Image">
+        <img src="https://via.placeholder.com/1920x1080" alt="Full Side Image">
     </div>
+
+    <script>
+        // Disable left-click
+        document.addEventListener('click', function(event) {
+            event.preventDefault();
+            return false;
+        });
+    </script>
 </body>
 </html>
