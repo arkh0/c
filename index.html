@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me with Full-Side Image</title>
+    <title>About Me with Sunset Animation</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
         /* xAI-inspired styling: Dark theme with space motifs */
         * {
@@ -42,19 +43,14 @@
         .right-side {
             flex: 1;
             background-color: #0f0f23; /* Slightly lighter dark for contrast */
-            overflow: hidden; /* Ensure image doesn't overflow */
+            overflow: hidden; /* Ensure animation doesn't overflow */
         }
 
-        /* Full-side image styling with sweep animation */
-        .right-side img {
+        /* Full-side Lottie animation */
+        .right-side lottie-player {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure image covers the entire area */
             display: block;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2); /* Cyan glow effect */
-            transform: translateX(100%); /* Start off-screen to the right */
-            animation: sweepIn 0.5s ease-out forwards; /* Sweep-in animation */
-            animation-delay: 0.1s; /* Slight stagger */
         }
 
         /* Animation keyframes */
@@ -62,12 +58,6 @@
             to {
                 opacity: 1;
                 transform: scale(1);
-            }
-        }
-
-        @keyframes sweepIn {
-            to {
-                transform: translateX(0); /* Slide to original position */
             }
         }
 
@@ -110,8 +100,8 @@
     </div>
 
     <div class="right-side">
-        <!-- Full-side image -->
-        <img src="https://arkh0.github.io/c/back.jpg" alt="Full Side Image">
+        <!-- Full-side vector animation using Lottie -->
+        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_oeh9lqw4.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
     </div>
 
     <script>
