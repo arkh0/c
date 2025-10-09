@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me with Sunset Animation</title>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     <style>
-        /* xAI-inspired styling: Dark theme with space motifs */
+        /* xAI-inspired styling: Dark theme */
         * {
             margin: 0;
             padding: 0;
@@ -15,23 +14,22 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #000000; /* Black background for space theme */
+            background-color: #000000; /* Black background */
             color: #ffffff;
             line-height: 1.6;
             display: flex;
             min-height: 100vh;
             overflow: hidden; /* Prevent scroll during animation */
-            /* Disable text selection for the entire page */
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
-            user-select: none; /* Standard */
+            user-select: none; /* Disable text selection */
         }
 
         .left-side {
             flex: 1;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); /* Dark gradient evoking night sky */
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); /* Dark gradient */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -42,27 +40,15 @@
 
         .right-side {
             flex: 1;
-            background-color: #0f0f23; /* Slightly lighter dark for contrast */
-            overflow: hidden; /* Ensure animation doesn't overflow */
-            position: relative;
+            background-color: #0f0f23; /* Slightly lighter dark */
+            overflow: hidden; /* Ensure SVG doesn't overflow */
         }
 
-        /* Full-side Lottie animation */
-        .right-side lottie-player {
+        /* SVG styling */
+        .right-side svg {
             width: 100%;
             height: 100%;
             display: block;
-        }
-
-        /* Fallback image */
-        .right-side .fallback-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none; /* Hidden unless Lottie fails */
-            position: absolute;
-            top: 0;
-            left: 0;
         }
 
         /* Animation keyframes */
@@ -71,6 +57,47 @@
                 opacity: 1;
                 transform: scale(1);
             }
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes palmSway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        @keyframes birdFly {
+            0% { transform: translateX(100%) translateY(0); }
+            100% { transform: translateX(-100%) translateY(20px); }
+        }
+
+        @keyframes sunSink {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+
+        /* Wave animation */
+        .wave {
+            animation: waveMove 10s linear infinite;
+        }
+
+        /* Palm tree sway */
+        .palm-tree {
+            transform-origin: bottom center;
+            animation: palmSway 6s ease-in-out infinite;
+        }
+
+        /* Bird animations */
+        .bird1 { animation: birdFly 30s linear infinite; }
+        .bird2 { animation: birdFly 35s linear infinite; animation-delay: 5s; }
+        .bird3 { animation: birdFly 40s linear infinite; animation-delay: 10s; }
+
+        /* Sun sinking */
+        .sun {
+            animation: sunSink 15s linear infinite alternate;
         }
 
         .left-side h1 {
@@ -112,10 +139,37 @@
     </div>
 
     <div class="right-side">
-        <!-- Full-side vector animation using Lottie -->
-        <lottie-player src="https://lottie.host/ce6c2ef3-698b-4f2c-a7b5-f0e1d517e7f4/8j0V0CuhqS.json" background="transparent" speed="0.8" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
-        <!-- Fallback static image -->
-        <img class="fallback-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Ocean Sunset Fallback">
+        <!-- SVG animation: Dark orange sunset with waves, palm tree, and birds -->
+        <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+            <!-- Sky gradient (dark orange to deep blue) -->
+            <defs>
+                <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" /> <!-- Dark orange -->
+                    <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" /> <!-- Deep blue -->
+                </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="800" height="600" fill="url(#skyGradient)" />
+
+            <!-- Sun -->
+            <circle class="sun" cx="400" cy="150" r="50" fill="#FF8C00" />
+
+            <!-- Waves (two layers for depth) -->
+            <path class="wave" d="M0 400 Q200 350 400 400 T800 400 T1200 400 T1600 400 V600 H0 Z" fill="#2F4F4F" opacity="0.8" />
+            <path class="wave" style="animation-delay: -2s;" d="M0 450 Q200 400 400 450 T800 450 T1200 450 T1600 450 V600 H0 Z" fill="#4682B4" opacity="0.7" />
+
+            <!-- Palm tree -->
+            <g class="palm-tree" transform="translate(100, 400)">
+                <!-- Trunk -->
+                <path d="M0 200 L10 0 Q10 -50 0 -100 Q-10 -50 0 0 L-10 200 Z" fill="#3C2F2F" />
+                <!-- Leaves -->
+                <path d="M0 -100 Q-50 -150 -100 -100 Q-50 -50 0 -100 Q50 -50 100 -100 Q50 -150 0 -100 Z" fill="#2F4F4F" />
+            </g>
+
+            <!-- Birds (V-shaped) -->
+            <path class="bird1" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 100)" />
+            <path class="bird2" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 120)" />
+            <path class="bird3" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 140)" />
+        </svg>
     </div>
 
     <script>
@@ -123,15 +177,6 @@
         document.addEventListener('click', function(event) {
             event.preventDefault();
             return false;
-        });
-
-        // Fallback: Show static image if Lottie fails
-        window.addEventListener('load', function() {
-            const lottiePlayer = document.querySelector('lottie-player');
-            const fallbackImage = document.querySelector('.fallback-image');
-            if (!lottiePlayer || !lottiePlayer.load) {
-                fallbackImage.style.display = 'block';
-            }
         });
     </script>
 </body>
