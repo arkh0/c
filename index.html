@@ -69,11 +69,6 @@
             50% { transform: rotate(2deg); }
         }
 
-        @keyframes birdFly {
-            0% { transform: translateX(100%) translateY(0); }
-            100% { transform: translateX(-100%) translateY(20px); }
-        }
-
         @keyframes sunSink {
             0% { transform: translateY(0); }
             100% { transform: translateY(20px); }
@@ -81,7 +76,7 @@
 
         /* Wave animation */
         .wave {
-            animation: waveMove 10s linear infinite;
+            animation: waveMove 30s linear infinite; /* Extended to 30s */
         }
 
         /* Palm tree sway */
@@ -89,11 +84,6 @@
             transform-origin: bottom center;
             animation: palmSway 6s ease-in-out infinite;
         }
-
-        /* Bird animations */
-        .bird1 { animation: birdFly 30s linear infinite; }
-        .bird2 { animation: birdFly 35s linear infinite; animation-delay: 5s; }
-        .bird3 { animation: birdFly 40s linear infinite; animation-delay: 10s; }
 
         /* Sun sinking */
         .sun {
@@ -139,7 +129,7 @@
     </div>
 
     <div class="right-side">
-        <!-- SVG animation: Dark orange sunset with waves, palm tree, and birds -->
+        <!-- SVG animation: Dark orange sunset with waves, palm tree, and shore at bottom -->
         <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
             <!-- Sky gradient (dark orange to deep blue) -->
             <defs>
@@ -153,22 +143,20 @@
             <!-- Sun -->
             <circle class="sun" cx="400" cy="150" r="50" fill="#FF8C00" />
 
-            <!-- Waves (two layers for depth) -->
-            <path class="wave" d="M0 400 Q200 350 400 400 T800 400 T1200 400 T1600 400 V600 H0 Z" fill="#2F4F4F" opacity="0.8" />
-            <path class="wave" style="animation-delay: -2s;" d="M0 450 Q200 400 400 450 T800 450 T1200 450 T1600 450 V600 H0 Z" fill="#4682B4" opacity="0.7" />
+            <!-- Waves (two layers for depth, positioned above shore) -->
+            <path class="wave" d="M0 550 Q200 500 400 550 T800 550 T1200 550 T1600 550 V600 H0 Z" fill="#2F4F4F" opacity="0.8" />
+            <path class="wave" style="animation-delay: -6s;" d="M0 570 Q200 520 400 570 T800 570 T1200 570 T1600 570 V600 H0 Z" fill="#4682B4" opacity="0.7" />
 
-            <!-- Palm tree -->
-            <g class="palm-tree" transform="translate(100, 400)">
+            <!-- Smaller shore (static, at bottom) -->
+            <path d="M0 580 Q200 575 400 580 T800 580 V600 H0 Z" fill="#8B4513" opacity="0.9" /> <!-- Sandy brown shore -->
+
+            <!-- Palm tree (aligned with shore) -->
+            <g class="palm-tree" transform="translate(100, 580)">
                 <!-- Trunk -->
                 <path d="M0 200 L10 0 Q10 -50 0 -100 Q-10 -50 0 0 L-10 200 Z" fill="#3C2F2F" />
                 <!-- Leaves -->
                 <path d="M0 -100 Q-50 -150 -100 -100 Q-50 -50 0 -100 Q50 -50 100 -100 Q50 -150 0 -100 Z" fill="#2F4F4F" />
             </g>
-
-            <!-- Birds (V-shaped) -->
-            <path class="bird1" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 100)" />
-            <path class="bird2" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 120)" />
-            <path class="bird3" d="M0 0 L10 5 L20 0" fill="none" stroke="#000000" stroke-width="2" transform="translate(800, 140)" />
         </svg>
     </div>
 
