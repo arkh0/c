@@ -3,444 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cosmic Portal</title>
+    <title>About Me with Full-Side Image</title>
     <style>
-        /* Reset default styles */
+        /* xAI-inspired styling: Dark theme with space motifs */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        /* Body styling with background and gradient */
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(to bottom, #0a0a0a 70%, #4682b4);
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000000; /* Black background for space theme */
+            color: #ffffff;
             line-height: 1.6;
-            overflow-x: hidden;
-            cursor: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scroll during animation */
         }
-        /* Custom cursor styling */
-        .cursor {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ffd700 20%, transparent 80%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-        .cursor.glow {
-            box-shadow: 0 0 12px #ffd700, 0 0 24px #bb86fc;
-            transform: scale(1.4);
-        }
-        .cursor-glow {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(187, 134, 252, 0.4) 0%, rgba(187, 134, 252, 0) 70%);
-            filter: blur(20px);
-            pointer-events: none;
-            z-index: -2;
-            transform: translate(-50%, -50%);
-            transition: background 0.3s ease;
-        }
-        a:hover {
-            cursor: none;
-        }
-        /* Header styling */
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            background: transparent;
-            position: relative;
-            z-index: 1;
-            margin: 0 10%;
-        }
-        h1 {
-            font-size: 2.5em;
-            color: #ffd700;
-            text-shadow: 0 0 10px #ffd700, 0 0 20px #bb86fc;
-            animation: neon-flicker 3s infinite;
-            display: inline-block;
-            position: relative;
-        }
-        @keyframes neon-flicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ffd700, 0 0 20px #bb86fc; }
-            50% { opacity: 0.95; text-shadow: 0 0 15px #ffd700, 0 0 25px #bb86fc; }
-        }
-        .emoji-spin {
-            display: inline-block;
-            animation: spin 3s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-        }
-        /* Section styling with blur */
-        section {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(20, 20, 20, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 1;
-            margin-left: 10%;
-            margin-right: 10%;
-            transition: transform 0.3s ease, opacity 0.5s ease;
-            opacity: 0;
-            transform: translateY(50px);
-            text-align: center;
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Paragraph highlight */
-        section p {
-            margin: 0 auto;
-            max-width: 600px;
-            padding: 10px;
-            background: rgba(187, 134, 252, 0.1); /* Subtle paragraph highlight */
-            border-radius: 8px;
-        }
-        /* Word highlight on hover */
-        .word-highlight {
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .word-highlight:hover {
-            background: rgba(187, 134, 252, 0.4); /* Stronger highlight on hover */
-            color: #ffd700;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        section ul {
-            margin: 0 auto;
-            max-width: 600px;
-            list-style: none;
-            padding: 10px 0;
-        }
-        section ul li {
-            margin: 10px 0;
-        }
-        h2 {
-            color: #bb86fc;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #bb86fc;
-        }
-        a {
-            color: #03dac6;
-            text-decoration: none;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: #03dac6;
-            transition: width 0.3s ease;
-        }
-        a:hover::after {
-            width: 100%;
-        }
-        a:hover {
-            color: #ffd700;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
+
+        .left-side {
+            flex: 1;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); /* Dark gradient evoking night sky */
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            max-width: 600px;
-            margin: 0 auto;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeInScale 0.5s ease-out forwards; /* Fast animation */
         }
-        .button {
-            background: linear-gradient(45deg, #6200ea, #bb86fc);
-            padding: 10px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+
+        .right-side {
+            flex: 1;
+            background-color: #0f0f23; /* Slightly lighter dark for contrast */
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeInScale 0.5s ease-out forwards; /* Fast animation */
+            animation-delay: 0.1s; /* Slight stagger for right side */
+            overflow: hidden; /* Ensure image doesn't overflow */
         }
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.6);
-        }
-        .fun-fact {
-            font-style: italic;
-            color: #ffeb3b;
-            text-align: center;
-            margin: 20px 0;
-            animation: fadeIn 2s ease-in;
-            background: rgba(187, 134, 252, 0.1); /* Highlight fun fact */
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            color: #e0e0e0;
-            border-top: 1px solid #4682b4;
-            position: relative;
-            z-index: 1;
-            margin: 0 10%;
-            background: transparent;
-        }
-        footer p {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        /* Full-side image styling */
+        .right-side img {
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            object-fit: cover; /* Ensure image covers the entire area */
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2); /* Cyan glow effect */
         }
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
+
+        /* Animation keyframes */
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
+
+        .left-side h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #00d4ff; /* Cyan accent for xAI vibe */
         }
-        .parallax-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -4;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
-            transform: translateZ(0);
+
+        .left-side p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
         }
-        @media (max-width: 600px) {
-            h1 { font-size: 2em; }
-            section { padding: 15px; margin-left: 5%; margin-right: 5%; }
-            footer { margin-left: 5%; margin-right: 5%; }
-            .buttons { grid-template-columns: 1fr; }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .left-side, .right-side {
+                flex: none;
+                padding: 2rem 1rem;
+            }
+
+            .right-side {
+                height: 50vh; /* Half viewport height on mobile */
+            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="parallax-layer"></div>
-    <div class="cursor"></div>
-    <div class="cursor-glow"></div>
-    <canvas id="cosmic-bg"></canvas>
-    <div class="stars"></div>
-    <header>
-        <h1>Hello, Cosmos! <span class="emoji-spin">🌠</span></h1>
-        <p>I'm [Your Name]! They/Them 🚀🎹💾🌍</p>
-    </header>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I'm a digital nomad, crafting code, music, and pixel art under the stars. From building sleek apps to spinning beats, I thrive in the intersection of tech and creativity. Explore my universe or ping me for a collab!</p>
-        <p class="fun-fact">Fun fact: I once coded a neural net to generate alien melodies—it's out there!</p>
-    </section>
-    <section id="support">
-        <h2>Fuel My Orbit</h2>
-        <p>Love my vibe? Support my creations by grabbing some digital goodies or tossing a star my way. Every bit powers my next adventure!</p>
-        <ul>
-            <li><a href="https://your-shop-link.com">Shop My Art/Music</a></li>
-            <li><a href="https://patreon.com/yourname">Patreon</a></li>
-            <li><a href="https://ko-fi.com/yourname">Buy Me a Stardust Latte</a></li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2>Interstellar Comms</h2>
-        <p>Drop me a message at: yourname@yourdomain.com. For secure transmissions, use my PGP key (fingerprint: XYZ789...).</p>
-        <p><a href="mailto:yourname@yourdomain.com">Send a Signal</a></p>
-    </section>
-    <section id="metadata">
-        <h2>Cosmic Metadata</h2>
-        <ul>
-            <li><strong>Colors:</strong> Nebula #6200ea, Starlight #03dac6, Cosmic Dust #bb86fc</li>
-            <li><strong>Keys:</strong> PGP Public Key - [Insert your key]</li>
-            <li><strong>Find Me:</strong> 
-                <a href="https://x.com/yourhandle">X</a>, 
-                <a href="https://github.com/yourusername">GitHub</a>, 
-                <a href="https://twitch.tv/yourchannel">Twitch</a>
-            </li>
-            <li><strong>Projects:</strong> Astro Code Editor, Nebula Beats EP, Pixel Galaxy Game</li>
-        </ul>
-    </section>
-    <section id="friends">
-        <h2>Galactic Crew</h2>
-        <div class="buttons">
-            <a href="https://friend1.com" class="button">Star Buddy 1</a>
-            <a href="https://friend2.com" class="button">Cosmic Pal 2</a>
-            <a href="https://friend3.com" class="button">Orbit Mate 3</a>
-        </div>
-    </section>
-    <footer>
-        <p>Powered by Open-Source Stardust | Built with HTML, CSS, JS | Beam Up!</p>
-        <p>Tags: Cosmic Code | Retro Futurism | Free Software | Infinite Loops</p>
-    </footer>
-    <script>
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', e => e.preventDefault());
+    <div class="left-side">
+        <!-- Static place to write about yourself -->
+        <h1>About Me</h1>
+        <p>Hi, I'm [Your Name], a passionate developer and AI enthusiast. I love building innovative tools that bridge technology and creativity.</p>
+        <p>With a background in [your field], I've worked on projects ranging from machine learning models to web applications. When not coding, you can find me exploring the latest in sci-fi literature or stargazing—fitting for an xAI fan!</p>
+        <p>Feel free to reach out if you'd like to collaborate on something exciting.</p>
+    </div>
 
-        // Word highlight functionality
-        document.querySelectorAll('section p').forEach(paragraph => {
-            const text = paragraph.innerText;
-            const words = text.split(' ');
-            paragraph.innerHTML = words.map(word => `<span class="word-highlight">${word}</span>`).join(' ');
-        });
-
-        // Prevent text copying
-        document.addEventListener('copy', e => e.preventDefault());
-
-        // Cursor and glow movement
-        const cursor = document.querySelector('.cursor');
-        const cursorGlow = document.querySelector('.cursor-glow');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = `${e.clientX - 5}px`;
-            cursor.style.top = `${e.clientY - 5}px`;
-            cursorGlow.style.left = `${e.clientX}px`;
-            cursorGlow.style.top = `${e.clientY}px`;
-            cursorGlow.style.background = `radial-gradient(circle, rgba(187, 134, 252, ${0.4 + Math.sin(Date.now() / 500) * 0.1}) 0%, rgba(187, 134, 252, 0) 70%)`;
-        });
-        document.addEventListener('mousedown', () => cursor.classList.add('glow'));
-        document.addEventListener('mouseup', () => cursor.classList.remove('glow'));
-
-        // Generate static stars
-        const starsContainer = document.querySelector('.stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = `${Math.random() * 3 + 1}px`;
-            star.style.height = star.style.width;
-            star.style.left = `${Math.random() * 100}vw`;
-            star.style.top = `${Math.random() * 100}vh`;
-            star.style.animationDelay = `${Math.random() * 5}s`;
-            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            starsContainer.appendChild(star);
-        }
-
-        // Canvas particle system
-        const canvas = document.getElementById('cosmic-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        let particles = [];
-        const particleCount = 50;
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = Math.random() * 0.6 - 0.3;
-                this.hue = Math.random() * 360;
-                this.tailLength = 10;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - this.speedX * this.tailLength, this.y - this.speedY * this.tailLength);
-                ctx.strokeStyle = `hsla(${this.hue}, 70%, 50%, 0.5)`;
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `hsl(${this.hue}, 70%, 50%)`;
-                ctx.fill();
-            }
-        }
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-                const mouseX = parseInt(cursor.style.left) + 5;
-                const mouseY = parseInt(cursor.style.top) + 5;
-                const dx = particle.x - mouseX;
-                const dy = particle.y - mouseY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 100) {
-                    ctx.beginPath();
-                    ctx.moveTo(particle.x, particle.y);
-                    ctx.lineTo(mouseX, mouseY);
-                    ctx.strokeStyle = `hsla(${particle.hue}, 70%, 50%, ${1 - distance / 100})`;
-                    ctx.stroke();
-                    particle.x -= dx * 0.03;
-                    particle.y -= dy * 0.03;
-                }
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        initParticles();
-        animateParticles();
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
-        const parallaxLayer = document.querySelector('.parallax-layer');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            parallaxLayer.style.transform = `translateY(${scrollY * 0.5}px)`;
-        });
-        const sections = document.querySelectorAll('section');
-        const revealSections = () => {
-            const triggerBottom = window.innerHeight * 0.85;
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < triggerBottom) {
-                    section.classList.add('visible');
-                }
-            });
-        };
-        window.addEventListener('scroll', revealSections);
-        revealSections();
-        const audio = new Audio('https://freesound.org/data/previews/242/242501_1772944-lq.mp3');
-        audio.loop = true;
-        audio.volume = 0.2;
-        document.body.addEventListener('mousemove', () => {
-            if (audio.paused) audio.play().catch(() => {});
-        });
-    </script>
+    <div class="right-side">
+        <!-- Full-side image -->
+        <img src="https://via.placeholder.com/1920x1080" alt="Full Side Image">
+    </div>
 </body>
 </html>
