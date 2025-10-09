@@ -3,150 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cosmic Corner</title>
+    <title>Your Cosmic Portal</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png'), #0a0a0a;
+            color: #e0e0e0;
             line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+        .cursor.glow {
+            box-shadow: 0 0 15px #ffd700, 0 0 30px #bb86fc;
+            transform: scale(1.5);
         }
         header {
             text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            border-bottom: 2px solid #bb86fc;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: shine 4s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
         }
         h1 {
-            font-size: 3em;
-            margin: 0;
+            font-size: 3.5em;
             color: #ffd700;
-            text-shadow: 0 0 10px #ffd700;
+            text-shadow: 0 0 15px #ffd700;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         .emoji-spin {
             display: inline-block;
-            animation: spin 2s linear infinite;
+            animation: spin 3s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         section {
-            max-width: 800px;
-            margin: 0 auto 20px;
-            padding: 20px;
-            background: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 1;
         }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
+        h2 {
+            color: #bb86fc;
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #bb86fc;
         }
         a {
-            color: #bb86fc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        a:hover {
             color: #03dac6;
+            text-decoration: none;
+            position: relative;
+        }
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: #03dac6;
+            transition: width 0.3s ease;
+        }
+        a:hover::after {
+            width: 100%;
         }
         .buttons {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
             justify-content: center;
-            gap: 10px;
         }
         .button {
-            background: #6200ea;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background: linear-gradient(45deg, #6200ea, #bb86fc);
+            padding: 12px 24px;
+            border-radius: 8px;
             color: white;
             font-weight: bold;
-            transition: transform 0.2s;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .button:hover {
-            transform: scale(1.05);
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.8em;
-            color: #888;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.5);
         }
         .fun-fact {
             font-style: italic;
             color: #ffeb3b;
             text-align: center;
             margin: 20px 0;
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #888;
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+        }
+        /* Parallax Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            section { padding: 15px; }
+            .buttons { grid-template-columns: 1fr; }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="cursor"></div>
+    <div class="stars"></div>
+
     <header>
-        <h1>Hello, Universe! <span class="emoji-spin">🚀</span></h1>
-        <p>I'm [Your Name]! He/Him 🌌🔭🎸🇺🇸</p>
+        <h1>Hello, Cosmos! <span class="emoji-spin">🌌</span></h1>
+        <p>I'm [Your Name]! They/Them 🚀🎹💾🌍</p>
     </header>
 
     <section id="about">
         <h2>About Me</h2>
-        <p>I'm a stargazer, coder, musician, and adventure seeker. I love building apps, jamming on my guitar, and exploring the cosmos. Feel free to wander through my digital galaxy or connect with me elsewhere!</p>
-        <p class="fun-fact">Fun fact: I've coded a mini-game that simulates black holes—wanna try? (Coming soon!)</p>
+        <p>I'm a digital nomad, crafting code, music, and pixel art under the stars. From building sleek apps to spinning beats, I thrive in the intersection of tech and creativity. Explore my universe or ping me for a collab!</p>
+        <p class="fun-fact">Fun fact: I once coded a neural net to generate alien melodies—it's out there!</p>
     </section>
 
     <section id="support">
-        <h2>Support My Journey</h2>
-        <p>If you'd like to fuel my creative rocket, check out my digital shop or drop a tip. Every bit helps launch new ideas! 🌟</p>
+        <h2>Fuel My Orbit</h2>
+        <p>Love my vibe? Support my creations by grabbing some digital goodies or tossing a star my way. Every bit powers my next adventure! ✨</p>
         <ul>
-            <li><a href="https://your-shop-link.com">Buy My Music/Art</a></li>
-            <li><a href="https://ko-fi.com/yourname">Buy Me a Coffee</a></li>
+            <li><a href="https://your-shop-link.com">Shop My Art/Music</a></li>
+            <li><a href="https://patreon.com/yourname">Patreon</a></li>
+            <li><a href="https://ko-fi.com/yourname">Buy Me a Stardust Latte</a></li>
         </ul>
     </section>
 
     <section id="contact">
-        <h2>Get in Touch</h2>
-        <p>Shoot me a message at: yourname@yourdomain.com. For secure chats, encrypt with my PGP key (fingerprint: ABC123...).</p>
+        <h2>Interstellar Comms</h2>
+        <p>Drop me a message at: yourname@yourdomain.com. For secure transmissions, use my PGP key (fingerprint: XYZ789...).</p>
+        <p><a href="mailto:yourname@yourdomain.com">Send a Signal</a></p>
     </section>
 
     <section id="metadata">
-        <h2>Metadata Vibes</h2>
+        <h2>Cosmic Metadata</h2>
         <ul>
-            <li><strong>Colors:</strong> Primary #6200ea, Secondary #03dac6, Accent #bb86fc</li>
-            <li><strong>Keys:</strong> PGP Public Key - [Paste your key here]</li>
-            <li><strong>Find Me:</strong> <a href="https://twitter.com/yourhandle">X/Twitter</a>, <a href="https://github.com/yourusername">GitHub</a>, <a href="https://youtube.com/yourchannel">YouTube</a></li>
-            <li><strong>Projects:</strong> Star Tracker App, Galactic Tunes Album, Code Nebula Repo</li>
+            <li><strong>Colors:</strong> Nebula #6200ea, Starlight #03dac6, Cosmic Dust #bb86fc</li>
+            <li><strong>Keys:</strong> PGP Public Key - [Insert your key]</li>
+            <li><strong>Find Me:</strong> 
+                <a href="https://x.com/yourhandle">X</a>, 
+                <a href="https://github.com/yourusername">GitHub</a>, 
+                <a href="https://twitch.tv/yourchannel">Twitch</a>
+            </li>
+            <li><strong>Projects:</strong> Astro Code Editor, Nebula Beats EP, Pixel Galaxy Game</li>
         </ul>
     </section>
 
     <section id="friends">
-        <h2>Cool Companions</h2>
+        <h2>Galactic Crew</h2>
         <div class="buttons">
-            <a href="https://friend1.com" class="button">Friend 1</a>
-            <a href="https://friend2.com" class="button">Friend 2</a>
-            <a href="https://friend3.com" class="button">Friend 3</a>
-            <!-- Add more as needed -->
+            <a href="https://friend1.com" class="button">Star Buddy 1</a>
+            <a href="https://friend2.com" class="button">Cosmic Pal 2</a>
+            <a href="https://friend3.com" class="button">Orbit Mate 3</a>
+            <!-- Add more buttons -->
         </div>
     </section>
 
     <footer>
-        <p>Powered by Open-Source Magic ✨ | Built with HTML & CSS | Explore the Stars!</p>
-        <p>Tags: Cosmic Code | Retro Vibes | Free Software | Adventure Awaits</p>
+        <p>Powered by Open-Source Stardust ✨ | Built with HTML, CSS, JS | Beam Up!</p>
+        <p>Tags: Cosmic Code | Retro Futurism | Free Software | Infinite Loops</p>
     </footer>
 
     <script>
-        // Simple JS for fun: Change header color on hover
-        const header = document.querySelector('header');
-        header.addEventListener('mouseover', () => {
-            header.style.background = 'linear-gradient(to bottom, #302b63, #0f0c29, #24243e)';
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX - 10}px`;
+            cursor.style.top = `${e.clientY - 10}px`;
         });
-        header.addEventListener('mouseout', () => {
-            header.style.background = 'linear-gradient(to bottom, #0f0c29, #302b63, #24243e)';
+        document.addEventListener('mousedown', () => cursor.classList.add('glow'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('glow'));
+
+        // Generate Random Stars
+        const starsContainer = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+
+        // Header Gradient Shift
+        const header = document.querySelector('header');
+        header.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            header.style.background = `linear-gradient(${x * 360}deg, #0f0c29, #302b63, #24243e)`;
         });
     </script>
 </body>
