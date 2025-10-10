@@ -42,6 +42,7 @@
             flex: 1;
             background-color: #0f0f23; /* Slightly lighter dark */
             overflow: hidden; /* Ensure image doesn't overflow */
+            position: relative; /* For CRT lines overlay */
         }
 
         /* Image styling */
@@ -49,8 +50,37 @@
             width: 100%;
             height: 100%;
             object-fit: cover; /* Ensure image covers the area */
+            object-position: right; /* Align rightmost side with screen edge */
             display: block;
             pointer-events: none; /* Prevent dragging and other interactions */
+        }
+
+        /* CRT lines overlay */
+        .right-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Horizontal lines */
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent 3px,
+                    rgba(255, 255, 255, 0.05) 3px,
+                    rgba(255, 255, 255, 0.05) 4px
+                ),
+                /* Vertical lines */
+                repeating-linear-gradient(
+                    to right,
+                    transparent,
+                    transparent 3px,
+                    rgba(255, 255, 255, 0.05) 3px,
+                    rgba(255, 255, 255, 0.05) 4px
+                );
+            pointer-events: none; /* Ensure overlay doesn't interfere with interactions */
         }
 
         /* Animation keyframes */
@@ -94,8 +124,8 @@
     <div class="left-side">
         <!-- Static place to write about yourself -->
         <h1>Hello, World!</h1>
-        <p>Born in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
-        <p>I got to work with my first computer when i was 6, it was a Pentium with one gigs of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance if it came to my hand so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
+        <p>Spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
+        <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance if it came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
         <p>Feel free to reach out if you'd like to collaborate on something exciting.</p>
     </div>
 
