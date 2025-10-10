@@ -55,12 +55,8 @@
             display: block;
             pointer-events: none; /* Prevent dragging and other interactions */
             animation: panImage 1s ease-out forwards; /* Panning animation */
-        }
-
-        /* Panning animation keyframes */
-        @keyframes panImage {
-            0% { transform: translateX(10px); }
-            100% { transform: translateX(0); }
+            position: relative; /* Ensure image is behind CRT lines */
+            z-index: 1; /* Lower z-index than CRT lines */
         }
 
         /* CRT lines overlay */
@@ -77,18 +73,25 @@
                     to bottom,
                     transparent,
                     transparent 3px,
-                    rgba(255, 255, 255, 0.05) 3px,
-                    rgba(255, 255, 255, 0.05) 4px
+                    rgba(255, 255, 255, 0.1) 3px, /* Slightly increased opacity for visibility */
+                    rgba(255, 255, 255, 0.1) 4px
                 ),
                 /* Vertical lines */
                 repeating-linear-gradient(
                     to right,
                     transparent,
                     transparent 3px,
-                    rgba(255, 255, 255, 0.05) 3px,
-                    rgba(255, 255, 255, 0.05) 4px
+                    rgba(255, 255, 255, 0.1) 3px, /* Slightly increased opacity for visibility */
+                    rgba(255, 255, 255, 0.1) 4px
                 );
             pointer-events: none; /* Ensure overlay doesn't interfere with interactions */
+            z-index: 2; /* Higher z-index to appear above image */
+        }
+
+        /* Panning animation keyframes */
+        @keyframes panImage {
+            0% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
         }
 
         /* Animation keyframes for left-side fade-in */
