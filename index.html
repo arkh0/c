@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
+    <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
     <style>
         /* xAI-inspired styling: Dark theme */
         * {
@@ -53,6 +54,13 @@
             object-position: right; /* Align rightmost side with screen edge */
             display: block;
             pointer-events: none; /* Prevent dragging and other interactions */
+            animation: panImage 1s ease-out forwards; /* Panning animation */
+        }
+
+        /* Panning animation keyframes */
+        @keyframes panImage {
+            0% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
         }
 
         /* CRT lines overlay */
@@ -83,7 +91,7 @@
             pointer-events: none; /* Ensure overlay doesn't interfere with interactions */
         }
 
-        /* Animation keyframes */
+        /* Animation keyframes for left-side fade-in */
         @keyframes fadeInScale {
             to {
                 opacity: 1;
@@ -130,7 +138,7 @@
     </div>
 
     <div class="right-side">
-        <!-- Image replacing SVG animation -->
+        <!-- Image with panning animation -->
         <img src="https://arkh0.github.io/c/back.jpg" alt="Background Image">
     </div>
 
