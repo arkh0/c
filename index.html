@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
-    <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
+    <link rel="icon" href="https://arkh0.github.io/c/icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* xAI-inspired styling: Dark theme */
+        /* xAI-inspired styling: Dark, mysterious, professional theme */
         * {
             margin: 0;
             padding: 0;
@@ -14,9 +15,9 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Mono', sans-serif;
             background-color: #000000; /* Black background */
-            color: #ffffff;
+            color: #e0e0e0; /* Lighter gray for text readability */
             line-height: 1.6;
             display: flex;
             min-height: 100vh;
@@ -30,7 +31,7 @@
         .left-side {
             flex: 1;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); /* Dark gradient */
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #2a1a3e 100%); /* Darker, purple-tinted gradient */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -43,7 +44,7 @@
             flex: 1;
             background-color: #0f0f23; /* Slightly lighter dark */
             overflow: hidden; /* Ensure image doesn't overflow */
-            position: relative; /* For CRT lines overlay */
+            position: relative; /* For CRT lines and vignette overlay */
         }
 
         /* Image styling */
@@ -55,11 +56,24 @@
             display: block;
             pointer-events: none; /* Prevent dragging and other interactions */
             animation: panImage 1s ease-out forwards; /* Panning animation */
-            position: relative; /* Ensure image is behind CRT lines */
-            z-index: 1; /* Lower z-index than CRT lines */
+            position: relative; /* Ensure image is behind CRT lines and vignette */
+            z-index: 1; /* Lower z-index than overlays */
         }
 
-        /* CRT lines overlay */
+        /* Vignette effect for mysterious feel */
+        .right-side::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.5) 100%); /* Subtle vignette */
+            pointer-events: none;
+            z-index: 3; /* Above image and CRT lines */
+        }
+
+        /* CRT lines overlay with subtle flicker */
         .right-side::before {
             content: '';
             position: absolute;
@@ -73,7 +87,7 @@
                     to bottom,
                     transparent,
                     transparent 3px,
-                    rgba(255, 255, 255, 0.1) 3px, /* Slightly increased opacity for visibility */
+                    rgba(255, 255, 255, 0.1) 3px,
                     rgba(255, 255, 255, 0.1) 4px
                 ),
                 /* Vertical lines */
@@ -81,17 +95,24 @@
                     to right,
                     transparent,
                     transparent 3px,
-                    rgba(255, 255, 255, 0.1) 3px, /* Slightly increased opacity for visibility */
+                    rgba(255, 255, 255, 0.1) 3px,
                     rgba(255, 255, 255, 0.1) 4px
                 );
             pointer-events: none; /* Ensure overlay doesn't interfere with interactions */
-            z-index: 2; /* Higher z-index to appear above image */
+            z-index: 2; /* Above image, below vignette */
+            animation: flicker 2s infinite; /* Subtle flicker effect */
         }
 
         /* Panning animation keyframes */
         @keyframes panImage {
             0% { transform: translateX(10px); }
             100% { transform: translateX(0); }
+        }
+
+        /* Subtle flicker for CRT lines */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
         }
 
         /* Animation keyframes for left-side fade-in */
@@ -105,13 +126,16 @@
         .left-side h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #00d4ff; /* Cyan accent for xAI vibe */
+            color: #00b7eb; /* Deeper cyan for cooler, mysterious vibe */
+            text-shadow: 0 0 8px rgba(0, 183, 235, 0.5); /* Subtle glow effect */
+            font-family: 'Roboto Mono', monospace; /* Monospace for techy feel */
         }
 
         .left-side p {
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            opacity: 0.9;
+            opacity: 0.85; /* Slightly reduced opacity for mystique */
+            font-family: 'Inter', sans-serif; /* Clean, professional font */
         }
 
         /* Responsive for smaller screens */
@@ -135,9 +159,9 @@
     <div class="left-side">
         <!-- Static place to write about yourself -->
         <h1>Hello, World!</h1>
-        <p>Spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
-        <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance if it came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
-        <p>Feel free to reach out if you'd like to collaborate on something exciting.</p>
+        <p>Named Arman and spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
+        <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance that came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
+        <p>I'm interested in any matter of networking, wireless and wired especially fiber optics, </p>
     </div>
 
     <div class="right-side">
