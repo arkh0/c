@@ -4,7 +4,13 @@ document.addEventListener('click', function(event) {
     return false;
 });
 
-// REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+// Disable right-click (moved from inline attribute)
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+    return false;
+});
+
+// REPLACE WITH YOUR REDEPLOYED GAS WEB APP URL
 const LOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec';
 
 // Function to fetch IP with fallback
