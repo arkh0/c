@@ -11,7 +11,7 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 // REPLACE WITH YOUR REDEPLOYED GAS WEB APP URL
-const LOG_ENDPOINT = 'script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec';
+const LOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec';
 
 // Function to fetch IP with fallback
 async function getIP() {
