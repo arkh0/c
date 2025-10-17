@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
-    <link rel="icon" href="https://arkh0.github.io/c/icon.png" type="image/png">
+    <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <style>
         /* xAI-inspired styling: Dark, mysterious, professional theme */
         * {
@@ -175,6 +178,52 @@
             event.preventDefault();
             return false;
         });
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBWmfjNqmjxG_JKlONI2jFz3yiLHZd6SKg",
+            authDomain: "github-pages-eb221.firebaseapp.com",
+            projectId: "github-pages-eb221",
+            storageBucket: "github-pages-eb221.firebasestorage.app",
+            messagingSenderId: "518069095715",
+            appId: "1:518069095715:web:c6440b0f4487ac9d8b9096"
+        };
+
+        // Initialize Firebase and Firestore
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Function to log visitor data
+        async function logVisitor() {
+            try {
+                // Fetch IP from ipify
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const ip = ipData.ip || 'unknown';
+
+                // Collect other data
+                const visitorData = {
+                    ip: ip,
+                    userAgent: navigator.userAgent,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    referrer: document.referrer || 'direct',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    pageUrl: window.location.href
+                };
+
+                // Add to Firestore collection 'visitors'
+                await db.collection('visitors').add(visitorData);
+                console.log('Visitor logged successfully:', visitorData);
+            } catch (error) {
+                console.error('Error logging visitor:', error);
+            }
+        }
+
+        // Run on page load (only once per session)
+        if (!sessionStorage.getItem('visitorLogged')) {
+            logVisitor();
+            sessionStorage.setItem('visitorLogged', 'true');
+        }
     </script>
 </body>
 </html>
