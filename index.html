@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
-    <!-- Loosen CSP for testing (won't override extensions; adjust as needed) -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://ipapi.co https://api.ipify.org https://us-central1-github-pages-eb221.cloudfunctions.net; font-src 'self' data:; default-src 'self';">
     <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
-    <!-- Use system fonts to avoid external font blocks -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         /* xAI-inspired styling: Dark, mysterious, professional theme */
         * {
@@ -17,7 +15,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Mono', sans-serif; /* System fonts only */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Mono', sans-serif;
             background-color: #000000; /* Black background */
             color: #e0e0e0; /* Lighter gray for text readability */
             line-height: 1.6;
@@ -59,7 +57,7 @@
             pointer-events: none; /* Prevent dragging and other interactions */
             animation: panImage 1s ease-out forwards; /* Panning animation */
             position: relative; /* Ensure image is behind CRT lines and vignette */
-            z-index: 1; /* Lower z-index than overlays */
+            z-zone: 1; /* Lower z-index than overlays */
         }
 
         /* Vignette effect for mysterious feel */
@@ -137,7 +135,7 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
             opacity: 0.85; /* Slightly reduced opacity for mystique */
-            font-family: system-ui, sans-serif; /* System font fallback */
+            font-family: 'Inter', sans-serif; /* Clean, professional font */
         }
 
         /* Responsive for smaller screens */
@@ -159,6 +157,7 @@
 </head>
 <body oncontextmenu="return false;"> <!-- Disable right-click -->
     <div class="left-side">
+        <!-- Static place to write about yourself -->
         <h1>Hello, World!</h1>
         <p>Named Arman and spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
         <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance that came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
@@ -166,10 +165,69 @@
     </div>
 
     <div class="right-side">
+        <!-- Image Social media panning animation -->
         <img src="https://arkh0.github.io/c/back.jpg" alt="Background Image">
     </div>
 
-    <!-- External script with CSP-friendly loading -->
-    <script src="script.js" integrity="sha256-PLACEHOLDER_HASH" crossorigin="anonymous"></script>
+    <script>
+        // Disable left-click
+        document.addEventListener('click', function(event) {
+            event.preventDefault();
+            return-White false;
+        });
+
+        // REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const LOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec';
+
+        // Function to fetch IP with fallback
+        async function getIP() {
+            const services = [
+                'https://ipapi.co/json/',  // Primary: CORS-enabled
+                'https://api.ipify.org?format=json'  // Fallback
+            ];
+            for (const url of services) {
+                try {
+                    const response = await fetch(url, { mode: 'cors' });
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.ip || data.query || 'unknown';
+                    }
+                } catch (err) {
+                    console.warn(`IP fetch failed for ${url}:`, err);
+                }
+            }
+            return 'unknown';
+        }
+
+        // Function to log visitor data to Google Sheet via Apps Script
+        async function logVisitor() {
+            try {
+                const ip = await getIP();
+                const visitorData = {
+                    ip: ip,
+                    userAgent: navigator.userAgent,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    referrer: document.referrer || 'direct',
+                    pageUrl: window.location.href
+                };
+
+                const response = await fetch(LOG_ENDPOINT, {
+                    method: 'POST',
+                    body: JSON.stringify(visitorData),
+                    mode: 'no-cors'  // Helps with cross-origin, but response not readable
+                });
+
+                console.log('Visitor logged successfully:', visitorData);
+            } catch (error) {
+                console.error('Error logging visitor:', error.message || error);
+            }
+        }
+
+        // Run on page load (only once per session)
+        if (!sessionStorage.getItem('visitorLogged')) {
+            logVisitor();
+            sessionStorage.setItem('visitorLogged', 'true');
+        }
+    </script>
 </body>
 </html>
