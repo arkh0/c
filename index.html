@@ -190,16 +190,43 @@
         };
 
         // Initialize Firebase and Firestore
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        let db;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+        } catch (error) {
+            console.error('Firebase initialization failed:', error);
+        }
+
+        // Function to fetch IP with fallback
+        async function getIP() {
+            const services = [
+                'https://ipapi.co/json/',  // Primary: CORS-enabled, returns IP + geo
+                'https://api.ipify.org?format=json'  // Fallback
+            ];
+            for (const url of services) {
+                try {
+                    const response = await fetch(url, { mode: 'cors' });
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.ip || data.query || 'unknown';
+                    }
+                } catch (err) {
+                    console.warn(`IP fetch failed for ${url}:`, err);
+                }
+            }
+            return 'unknown';
+        }
 
         // Function to log visitor data
         async function logVisitor() {
+            if (!db) {
+                console.error('Firestore not initialized. Skipping log.');
+                return;
+            }
             try {
-                // Fetch IP from ipify
-                const ipResponse = await fetch('https://api.ipify.org?format=json');
-                const ipData = await ipResponse.json();
-                const ip = ipData.ip || 'unknown';
+                // Fetch IP with fallback
+                const ip = await getIP();
 
                 // Collect other data
                 const visitorData = {
@@ -215,7 +242,7 @@
                 await db.collection('visitors').add(visitorData);
                 console.log('Visitor logged successfully:', visitorData);
             } catch (error) {
-                console.error('Error logging visitor:', error);
+                console.error('Error logging visitor:', error.message || error);
             }
         }
 
