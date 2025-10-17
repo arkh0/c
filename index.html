@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
     <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
-    <!-- CSP: Allow self for scripts/styles, data/img everywhere, fetch to IP services -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src * data:; connect-src 'self' https://ipapi.co https://api.ipify.org https://script.google.com;">
+    <!-- CSP: Allow self, hashes for safety, connect for logging/IP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2rvfFrggTCtyF5WOiTri1gDS8Boibj4Njn0e+VCBmDI=' 'unsafe-hashes'; style-src 'self'; img-src * data:; connect-src 'self' https://ipapi.co https://api.ipify.org https://script.google.com;">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body oncontextmenu="return false;">
+<body>
     <div class="left-side">
         <h1>Hello, World!</h1>
         <p>Named Arman and spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
