@@ -5,9 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
     <link rel="icon" href="https://arkh0.github.io/c/icon.jpg" type="image/jpeg">
-    <!-- CSP: Allow self, hashes for safety, connect for logging/IP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2rvfFrggTCtyF5WOiTri1gDS8Boibj4Njn0e+VCBmDI=' 'unsafe-hashes'; style-src 'self'; img-src * data:; connect-src 'self' https://ipapi.co https://api.ipify.org https://script.google.com;">
+    <!-- Looser CSP for images/connect (won't override extensions, but helps) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; connect-src *; style-src 'self';">
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // Minimal inline script for disables (CSP hash for this exact code: generate if needed)
+      // Disable clicks if extension allows inline (otherwise, skip or use CSS pointer-events: none;)
+      document.addEventListener('click', function(e){e.preventDefault();});
+      document.addEventListener('contextmenu', function(e){e.preventDefault();});
+      
+      // Build query string for pixel (encode data)
+      const params = new URLSearchParams({
+        userAgent: navigator.userAgent,
+        screenResolution: screen.width + 'x' + screen.height,
+        referrer: document.referrer || 'direct',
+        pageUrl: window.location.href,
+        ip: 'client_ip'  // Placeholder—GAS can get real IP from request if needed
+      }).toString();
+      
+      // Load pixel on DOM ready
+      document.addEventListener('DOMContentLoaded', function() {
+        const pixel = new Image();
+        pixel.src = 'https://script.google.com/macros/s/YOUR_GAS_EXEC_URL/exec?' + params;  // REPLACE WITH YOUR URL
+        pixel.style.display = 'none';
+        document.body.appendChild(pixel);
+        console.log('Visitor pixel logged');
+      });
+    </script>
 </head>
 <body>
     <div class="left-side">
@@ -20,7 +44,5 @@
     <div class="right-side">
         <img src="https://arkh0.github.io/c/back.jpg" alt="Background Image">
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
