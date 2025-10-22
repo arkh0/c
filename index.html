@@ -6,32 +6,22 @@
     <title>About Me</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
-    <!-- CSP allowing ONE tiny inline script (HASHED) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; style-src 'self'; script-src 'self' 'sha256-rvBTje1SntP/WmvjeqpYroi4dP/nOgRy2iAEdrhkwLE=';">
 </head>
 <body>
-    <!-- DYNAMIC PIXEL WITH CSP-HASHED SCRIPT -->
+    <!-- TRACKING PIXEL - LOGS REAL IP FROM GAS + BASIC DATA -->
     <img class="tracking-pixel" 
-         id="pixel" 
-         data-ua="navigator.userAgent" 
-         data-res="screen.width+'x'+screen.height" 
-         data-ref="document.referrer||'direct'" 
-         data-url="window.location.href" 
-         src="https://script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec" 
+         src="https://script.google.com/macros/s/AKfycbzAcA4JNxg4YAYvNk2tEPj3m94YlZvru9KCF8afGzdf30tlGL_Aq6ncRoHxKGPbvgFG/exec?ua=Mozilla/5.0&res=1920x1080&ref=direct&url=https%3A%2F%2Farkh0.github.io%2Fc%2F" 
          alt="">
 
     <div class="left-side">
         <h1>Hello, World!</h1>
         <p>Named Arman and spawned in 01, in an island in the Persian gulf then moving to a northern city in Iran, i was extremely interested in mechanics and electronics from early childhood.</p>
-        <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because i was known to destroy any electric appliance that came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
+        <p>I got to work with my first computer when i was 6, it was a Pentium with one gig of ram, which was interestingly very powerful for any game back in the day. I loved it as you may have already guessed. I used to do my homework just to ask my mom to play with my pc as a reward. My days went on with playing games and listening to music and watching movies, untill it wasn't fun anymore, so i wanted to do something more interesting and open it up to see how does it work inside, of course my mom wasn't going to be happy at all because it was known to destroy any electric appliance that came to my vicinity so i set up a plan, i would break it intentionaly! and that was how i got premission to open up my pc to try to "repair" it, and therefore it was my first computer repair im my life :)</p>
         <p>I'm interested in any matter of networking, wireless and wired especially fiber optics, </p>
     </div>
 
     <div class="right-side">
         <img src="back.jpg" alt="Background Image">
     </div>
-
-    <!-- MINIMAL HASHED SCRIPT - CSP ALLOWED -->
-    <script>document.getElementById('pixel').src+='?ua='+encodeURIComponent(eval(document.getElementById('pixel').dataset.ua))+'&res='+encodeURIComponent(eval(document.getElementById('pixel').dataset.res))+'&ref='+encodeURIComponent(eval(document.getElementById('pixel').dataset.ref))+'&url='+encodeURIComponent(eval(document.getElementById('pixel').dataset.url));</script>
 </body>
 </html>
